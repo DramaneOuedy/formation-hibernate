@@ -1,0 +1,17 @@
+# Base MySQL 8 pour la formation : docker compose up -d
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: formation-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: formation_hibernate
+      MYSQL_USER: formation
+      MYSQL_PASSWORD: formation
+    ports:
+      - "3306:3306"
+    volumes:
+      - formation-mysql-data:/var/lib/mysql
+
+volumes:
+  formation-mysql-data:
