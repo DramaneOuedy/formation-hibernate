@@ -1,5 +1,7 @@
 # Formation Hibernate & JPA avec Spring Boot 3.4.3
 
+[![Tests](https://github.com/DramaneOuedy/formation-hibernate/actions/workflows/tests.yml/badge.svg)](https://github.com/DramaneOuedy/formation-hibernate/actions/workflows/tests.yml)
+
 Projet fil rouge de la formation **Hibernate – Niveau intermédiaire** (16 h, 2 jours).
 Formateur : OUEDRAOGO Dramane.
 
