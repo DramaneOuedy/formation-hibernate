@@ -1,6 +1,8 @@
 package com.formation.gestion.service;
 
+import com.formation.gestion.dto.ClientCaDto;
 import com.formation.gestion.dto.ClientNbCommandes;
+import com.formation.gestion.entity.Commande;
 import com.formation.gestion.entity.Client;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
@@ -8,6 +10,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -57,6 +60,30 @@ public class RapportService {
                         from Client c left join c.commandes o
                         group by c.id, c.nom
                         order by c.id""", ClientNbCommandes.class)
+                .getResultList();
+    }
+
+    // ----- Module 9 : fonctionnalite 11 -----
+
+    /** A OPTIMISER : 1 requete clients + 1 par client (commandes) + 1 par commande (lignes). */
+    public List<ClientCaDto> chiffreAffairesParClientNaif() {
+        return em.createQuery("select c from Client c order by c.id", Client.class)
+                .getResultList().stream()
+                .map(c -> new ClientCaDto(c.getNom(), (long) c.getCommandes().size(),
+                        c.getCommandes().stream()
+                                .map(Commande::getMontantTotal)
+                                .reduce(BigDecimal.ZERO, BigDecimal::add)))
+                .toList();
+    }
+
+    /** Version optimisee : une seule requete, aucune entite chargee. */
+    public List<ClientCaDto> chiffreAffairesParClient() {
+        return em.createQuery("""
+                        select new com.formation.gestion.dto.ClientCaDto(
+                            c.nom, count(distinct o.id), sum(l.prixUnitaire * l.quantite))
+                        from Client c left join c.commandes o left join o.lignes l
+                        group by c.id, c.nom
+                        order by c.id""", ClientCaDto.class)
                 .getResultList();
     }
 }
