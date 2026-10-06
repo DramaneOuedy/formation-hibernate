@@ -9,8 +9,16 @@ Domaine : gestion commerciale — `Client → Commande → LigneCommande → Pro
 
 - JDK 17 ou plus récent
 - Maven 3.9+
-- MySQL 8 (ou Docker : `docker compose up -d` lance la base `formation_hibernate`, utilisateur `formation` / `formation`)
+- MySQL 8 installé en local (port 3306), avec la base `formation_hibernate` et l'utilisateur `formation` / `formation`
 - VS Code avec les extensions recommandées (*Extension Pack for Java*, *Spring Boot Extension Pack*)
+
+Création de la base et du compte, à exécuter une fois en tant que `root` :
+
+```sql
+CREATE DATABASE IF NOT EXISTS formation_hibernate;
+CREATE USER IF NOT EXISTS 'formation'@'localhost' IDENTIFIED BY 'formation';
+GRANT ALL PRIVILEGES ON formation_hibernate.* TO 'formation'@'localhost';
+```
 
 ## Vérifier le projet (sans MySQL)
 

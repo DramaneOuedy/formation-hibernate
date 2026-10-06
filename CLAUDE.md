@@ -4,7 +4,7 @@ Projet pédagogique pour une formation de 16 h. Le code doit rester simple, lisi
 
 ## Commandes
 - Compiler et tester (H2, pas besoin de MySQL) : `mvn test`
-- Lancer un TP (MySQL requis, voir docker-compose.yml) : `mvn spring-boot:run -Dspring-boot.run.profiles=tp1` (tp1..tp8, projet)
+- Lancer un TP (MySQL local requis, voir README.md) : `mvn spring-boot:run -Dspring-boot.run.profiles=tp1` (tp1..tp8, projet)
 
 ## Structure
 - `entity/` entités JPA, `repository/` accès aux données (CommandeQueries en EntityManager, ClientRepository/CommandeRepository en Spring Data)
