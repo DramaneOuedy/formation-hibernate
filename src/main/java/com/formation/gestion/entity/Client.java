@@ -9,11 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Module 2 : mapping avance (contraintes, index, enum, objet embarque). */
 @Entity
@@ -47,6 +50,10 @@ public class Client {
     @Transient
     private boolean selectionne;              // etat d'ecran, non stocke
 
+    // Module 3 : cote inverse, SANS cascade (on ne supprime pas l'historique avec le client)
+    @OneToMany(mappedBy = "client")
+    private List<Commande> commandes = new ArrayList<>();
+
     protected Client() {
     }
 
@@ -71,4 +78,5 @@ public class Client {
     public void setAdresse(Adresse adresse) { this.adresse = adresse; }
     public boolean isSelectionne() { return selectionne; }
     public void setSelectionne(boolean selectionne) { this.selectionne = selectionne; }
+    public List<Commande> getCommandes() { return commandes; }
 }
