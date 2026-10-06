@@ -1,18 +1,26 @@
 package com.formation.gestion.entity;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/** Module 3 (pour aller plus loin) : relation ManyToMany avec Produit. */
+/**
+ * Module 3 (pour aller plus loin) : relation ManyToMany avec Produit.
+ * Module 7 : referentiel stable, lu souvent -> cache de 2e niveau.
+ */
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Categorie {
 
     @Id

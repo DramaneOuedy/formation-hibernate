@@ -36,6 +36,19 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Module 7 : cache de 2e niveau (JCache + Ehcache 3) -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>3.10.8</version>
+            <classifier>jakarta</classifier>
+        </dependency>
+
         <!-- Tests automatiques sans MySQL : base H2 en memoire -->
         <dependency>
             <groupId>com.h2database</groupId>
