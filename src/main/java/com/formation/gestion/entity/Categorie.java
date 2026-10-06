@@ -41,7 +41,7 @@ public class Categorie {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Categorie other)) return false;
-        return nom != null && nom.equals(other.nom);
+        return nom != null && nom.equals(other.getNom());   // getter : fonctionne aussi sur un proxy
     }
 
     @Override
